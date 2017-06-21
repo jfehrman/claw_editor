@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Claw Toolbar Demo</title>
+  </head>
+  <body>
+    <claw_toolbar></claw_toolbar>
+  </body>
+  <script type="text/javascript" src="../../bower_components/riot/riot+compiler.min.js"></script>
+  <script type="riot/tag" src="../../src/claw_toolbar.tag"></script>
+  <link rel="stylesheet" href="../../bower_components/materialize/dist/css/materialize.min.css" />
+  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css" />
+  <script>
+    riot.mount('claw_toolbar', {
+      "groups" : [ 
+        {
+          "buttons" : [
+            {
+              "click" : function(){console.log("shape");},
+              "icon" : "ion-record",
+            },
+            {
+              "click" : function(){console.log("color");},
+              "icon" : "ion-paintbucket",
+            },
+            {
+              "click" : function(){console.log("layers");},
+              "icon" : "ion-ios-color-filter-outline",
+            },
+            {
+              "click" : function(){console.log("save");},
+              "icon" : "ion-compose",
+            },
+          ]
+        },
+        {
+          "buttons" : [
+            {
+              "click" : function(){console.log("move up");},
+              "icon" : "ion-arrow-up-c",
+            },
+            {
+              "click" : function(){console.log("move down");},
+              "icon" : "ion-arrow-down-c",
+            },
+            {
+              "click" : function(){console.log("move to top");},
+              "icon" : "ion-arrow-up-a",
+            },
+            {
+              "click" : function(){console.log("move to bottom");},
+              "icon" : "ion-arrow-down-a",
+            },
+          ]
+        }
+      ]
+    });
+  </script>
+</html>
