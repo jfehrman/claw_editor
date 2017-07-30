@@ -21313,7 +21313,7 @@ var ClawEditorControls = function (_React$Component) {
         this.state.buttons.map(function (btn) {
           return _react2.default.createElement(
             "button",
-            { className: "claw-editor-button", title: btn.name },
+            { className: "claw-editor-button", title: btn.name, onclick: btn.clickEvent },
             _react2.default.createElement("i", { className: btn.iconClass })
           );
         })

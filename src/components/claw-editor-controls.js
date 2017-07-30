@@ -48,7 +48,7 @@ export default class ClawEditorControls extends React.Component{
     return(
       <div className="claw-editor-controls">
         {this.state.buttons.map(function(btn){
-          return <button className="claw-editor-button" title={btn.name}><i className={btn.iconClass} /></button>;
+          return <button className="claw-editor-button" title={btn.name} onclick={btn.clickEvent}><i className={btn.iconClass} /></button>;
         })}
       </div>
     )
