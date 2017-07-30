@@ -47,10 +47,10 @@ export default class ClawEditorControls extends React.Component{
   render(){
     return(
       <div className="claw-editor-controls">
-        {this.state.buttons.map(function(button){
-          return <button className="claw-editor-button" title=button.name><i className=button.iconClass /><button>;
+        {this.state.buttons.map(function(btn){
+          return <button className="claw-editor-button" title={btn.name}><i className={btn.iconClass} /></button>;
         })}
       </div>
-    );
+    )
   }
 }
