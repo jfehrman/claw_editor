@@ -21270,10 +21270,10 @@ var ClawEditorControls = function (_React$Component) {
   /**
    * Default constuctor.
    */
-  function ClawEditorControls() {
+  function ClawEditorControls(props) {
     _classCallCheck(this, ClawEditorControls);
 
-    var _this = _possibleConstructorReturn(this, (ClawEditorControls.__proto__ || Object.getPrototypeOf(ClawEditorControls)).call(this));
+    var _this = _possibleConstructorReturn(this, (ClawEditorControls.__proto__ || Object.getPrototypeOf(ClawEditorControls)).call(this, props));
 
     _this.state = {
       buttons: [{
