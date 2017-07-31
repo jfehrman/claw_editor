@@ -35,11 +35,33 @@ describe('ClawEditorControls', function(){
     tempType = shape;
   }
 
-  describe('#addShape()', function(){
+  /**
+   * Test all aspects of adding shapes to parent component.
+   */
+  describe('#addShape()', () => {
     it('ClawEditorControls shall be able to be passed a custom addShape function.', () => {
       const wrapper = mount(<ClawEditorControls addShape={testFunction} />);
       wrapper.prop("addShape")("circle");
       assert.equal("circle", tempType);
+    });
+
+    it('ClawEditorControls shall have a button for adding a circle.  The button shall call the addShape function passing circle as the shape.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction} />);
+      wrapper.find("#addCircle").simulate("click");
+      assert.equal("circle", tempType);
+    });
+
+    it('ClawEditorControls shall have a button for adding a square.  The button shall call the addShape function passing square as the shape.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction} />);
+      wrapper.find("#addSquare").simulate("click");
+      assert.equal("square", tempType);
+    });
+
+
+    it('ClawEditorControls shall have a button for adding a triangle.  The button shall call the addShape function passing triangle as the shape.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction} />);
+      wrapper.find("#addTriangle").simulate("click");
+      assert.equal("triangle", tempType);
     });
   });
 });

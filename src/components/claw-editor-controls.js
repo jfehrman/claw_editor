@@ -13,28 +13,32 @@ export default class ClawEditorControls extends React.Component{
    */
   constructor(props){
     super(props);
+    const component = this;
 
     this.state = {
       buttons : [
         {
+          "id" : "addCircle",
           "name" : "Add Circle",
           "iconClass" : "fa fa-circle-o",
           "clickEvent" : function(){
-            this.props._addShape("circle");
+            component.props.addShape("circle");
           }
         },
         {
+          "id" : "addSquare",
           "name" : "Add Square",
           "iconClass" : "fa fa-square-o",
           "clickEvent" : function(){
-            this.props._addShape("square");
+            component.props.addShape("square");
           }
         },
         {
+          "id" : "addTriangle",
           "name" : "Add Triangle",
           "iconClass" : "fa fa-caret-up",
           "clickEvent" : function(){
-            this.props._addShape("triangle");
+            component.props.addShape("triangle");
           }
         },
       ],
@@ -48,7 +52,7 @@ export default class ClawEditorControls extends React.Component{
     return(
       <div className="claw-editor-controls">
         {this.state.buttons.map(function(btn){
-          return <button className="claw-editor-button" title={btn.name} onClick={btn.clickEvent}><i className={btn.iconClass} /></button>;
+          return <button id={btn.id} className="claw-editor-button" title={btn.name} onClick={btn.clickEvent}><i className={btn.iconClass} /></button>;
         })}
       </div>
     )
