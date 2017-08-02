@@ -9,6 +9,7 @@ const {window} = doc;
 global.document = window.document; 
 global.window = window;
 const assert = Chai.assert;
+const expect = Chai.expect;
 
 /**
  * Test the claw editor controls object.
@@ -62,6 +63,29 @@ describe('ClawEditorControls', function(){
       const wrapper = mount(<ClawEditorControls addShape={testFunction} />);
       wrapper.find("#addTriangle").simulate("click");
       assert.equal("triangle", tempType);
+    });
+  });
+
+  /**
+   * Test to ensure the DOM is rendered correctly.
+   */
+  describe('DomStructure', () => {
+    it('ClawEditorControls DOM strucutre has an add circle button.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction}/>);
+      var domElement = wrapper.find("#addCircle");
+      expect(domElement).to.not.empty;
+    });
+    
+    it('ClawEditorControls DOM strucutre has an add square button.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction}/>);
+      var domElement = wrapper.find("#addSquare");
+      expect(domElement).to.not.empty;
+    });
+
+    it('ClawEditorControls DOM strucutre has an add triangle button.', () => {
+      const wrapper = mount(<ClawEditorControls addShape={testFunction}/>);
+      var domElement = wrapper.find("#addTriangle");
+      expect(domElement).to.not.empty;
     });
   });
 });
