@@ -1,4 +1,5 @@
 import React from 'react';
+import ShapeFactory from './support/factory/ShapeFactory';
 
 /**
  * Claw editor canvas.
@@ -11,10 +12,21 @@ export default class ClawEditorCanvas extends React.Component{
   /**
    * Default constuctor.
    */
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
-    this.state = {}
+    this.state = {
+      shapeFactory : new ShapeFactory()
+    }
+  }
+
+  /**
+   * Convert SVG shapes back to JSON representation.
+   *
+   * @return JSON representation of shapes in canvas.
+   */
+  _serializeShapes(){
+    
   }
 
   /**
@@ -23,7 +35,12 @@ export default class ClawEditorCanvas extends React.Component{
   render(){
     return(
       <div className="claw-editor-canvas">
+        <svg id="shapeDraw">
+          {this.props.shapes.map(function(shape){
+            return this.state.shapeFactory.build(shape.type, shape.height, shape.width, shape.color);
+          })}
+        </svg>
       </div>
-    );
+    )
   }
 }

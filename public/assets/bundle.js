@@ -21179,7 +21179,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(_clawEditor2.default, null), document.querySelector("#content-anchor"));
 
 },{"./components/claw-editor":190,"react":185,"react-dom":31}],187:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -21187,9 +21187,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _ShapeFactory = require('./support/factory/ShapeFactory');
+
+var _ShapeFactory2 = _interopRequireDefault(_ShapeFactory);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21211,24 +21215,46 @@ var ClawEditorCanvas = function (_React$Component) {
   /**
    * Default constuctor.
    */
-  function ClawEditorCanvas() {
+  function ClawEditorCanvas(props) {
     _classCallCheck(this, ClawEditorCanvas);
 
-    var _this = _possibleConstructorReturn(this, (ClawEditorCanvas.__proto__ || Object.getPrototypeOf(ClawEditorCanvas)).call(this));
+    var _this = _possibleConstructorReturn(this, (ClawEditorCanvas.__proto__ || Object.getPrototypeOf(ClawEditorCanvas)).call(this, props));
 
-    _this.state = {};
+    _this.state = {
+      shapeFactory: new _ShapeFactory2.default()
+    };
     return _this;
   }
 
   /**
-   * JSX based render function.
+   * Convert SVG shapes back to JSON representation.
+   *
+   * @return JSON representation of shapes in canvas.
    */
 
 
   _createClass(ClawEditorCanvas, [{
-    key: "render",
+    key: '_serializeShapes',
+    value: function _serializeShapes() {}
+
+    /**
+     * JSX based render function.
+     */
+
+  }, {
+    key: 'render',
     value: function render() {
-      return _react2.default.createElement("div", { className: "claw-editor-canvas" });
+      return _react2.default.createElement(
+        'div',
+        { className: 'claw-editor-canvas' },
+        _react2.default.createElement(
+          'svg',
+          { id: 'shapeDraw' },
+          this.props.shapes.map(function (shape) {
+            return this.state.shapeFactory.build(shape.type, shape.height, shape.width, shape.color);
+          })
+        )
+      );
     }
   }]);
 
@@ -21237,7 +21263,7 @@ var ClawEditorCanvas = function (_React$Component) {
 
 exports.default = ClawEditorCanvas;
 
-},{"react":185}],188:[function(require,module,exports){
+},{"./support/factory/ShapeFactory":191,"react":185}],188:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -21275,24 +21301,29 @@ var ClawEditorControls = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (ClawEditorControls.__proto__ || Object.getPrototypeOf(ClawEditorControls)).call(this, props));
 
+    var component = _this;
+
     _this.state = {
       buttons: [{
+        "id": "addCircle",
         "name": "Add Circle",
         "iconClass": "fa fa-circle-o",
         "clickEvent": function clickEvent() {
-          this.props._addShape("circle");
+          component.props.addShape("circle");
         }
       }, {
+        "id": "addSquare",
         "name": "Add Square",
         "iconClass": "fa fa-square-o",
         "clickEvent": function clickEvent() {
-          this.props._addShape("square");
+          component.props.addShape("square");
         }
       }, {
+        "id": "addTriangle",
         "name": "Add Triangle",
         "iconClass": "fa fa-caret-up",
         "clickEvent": function clickEvent() {
-          this.props._addShape("triangle");
+          component.props.addShape("triangle");
         }
       }]
     };
@@ -21313,7 +21344,7 @@ var ClawEditorControls = function (_React$Component) {
         this.state.buttons.map(function (btn) {
           return _react2.default.createElement(
             "button",
-            { className: "claw-editor-button", title: btn.name, onclick: btn.clickEvent },
+            { id: btn.id, className: "claw-editor-button", title: btn.name, onClick: btn.clickEvent },
             _react2.default.createElement("i", { className: btn.iconClass })
           );
         })
@@ -21453,7 +21484,7 @@ var ClawEditor = function (_React$Component) {
         'div',
         { className: 'claw-editor' },
         _react2.default.createElement(_clawEditorControls2.default, { addShape: this._addShape.bind(this) }),
-        _react2.default.createElement(_clawEditorCanvas2.default, null),
+        _react2.default.createElement(_clawEditorCanvas2.default, { shapes: this.state.shapes }),
         _react2.default.createElement(_clawEditorProperties2.default, null)
       );
     }
@@ -21483,4 +21514,69 @@ var ClawEditor = function (_React$Component) {
 
 exports.default = ClawEditor;
 
-},{"./claw-editor-canvas":187,"./claw-editor-controls":188,"./claw-editor-properties":189,"react":185}]},{},[186]);
+},{"./claw-editor-canvas":187,"./claw-editor-controls":188,"./claw-editor-properties":189,"react":185}],191:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/**
+ * Creates SVG shapes.
+ * 
+ * @author 1r0nm@n
+ * @since 04 August, 2017
+ */
+var ShapeFactory = function () {
+
+  /**
+   * Default constuctor.
+   */
+  function ShapeFactory() {
+    _classCallCheck(this, ShapeFactory);
+  }
+
+  /**
+   * Build the appropriate shape based on the type, height, width, and color.
+   *
+   * @return SVG representation of the shape.
+   */
+
+
+  _createClass(ShapeFactory, [{
+    key: 'build',
+    value: function build(shape, height, width, color) {
+      switch (shape.toLowerCase()) {
+        case 'circle':
+          var x = width / 2,
+              y = height / 2;
+          return _react2.default.createElement('circle', { cx: x, cy: y, fill: color });
+          break;
+        case 'square':
+          return _react2.default.createElement('rect', { width: width, height: height, fill: color });
+          break;
+        case 'triangle':
+          return _react2.default.createElement('rect', { width: width, height: height, fill: color });
+          break;
+        default:
+          throw new Error("Unable to create shpae because it is unknown.");
+      }
+    }
+  }]);
+
+  return ShapeFactory;
+}();
+
+exports.default = ShapeFactory;
+
+},{"react":185}]},{},[186]);

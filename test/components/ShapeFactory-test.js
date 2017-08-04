@@ -52,5 +52,11 @@ describe('ShapeFactory', () => {
       assert.equal(expectedResults.fill, results.props.fill);
       assert.equal(expectedResults.type, results.type);
     });
+
+    it('ShapeFactory shall be able to build a triangle when the build function is passed triangle description.', () => {
+      var shapeFactory = new ShapeFactory();
+      var results = shapeFactory.build('triangle', 10, 10, 'red');
+      //TODO Complete test.  Not enough time to finish the test today.
+    });
   });
 });

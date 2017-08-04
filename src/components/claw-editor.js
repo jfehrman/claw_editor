@@ -28,8 +28,8 @@ export default class ClawEditor extends React.Component{
   render(){
     return(
       <div className="claw-editor">
-        <ClawEditorControls addShape={this._addShape.bind(this)}/>
-        <ClawEditorCanvas />
+        <ClawEditorControls addShape={this._addShape.bind(this)} />
+        <ClawEditorCanvas shapes={this.state.shapes} />
         <ClawEditorProperties />
       </div>
     );
