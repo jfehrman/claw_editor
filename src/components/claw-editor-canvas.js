@@ -33,11 +33,12 @@ export default class ClawEditorCanvas extends React.Component{
    * JSX based render function.
    */
   render(){
+    var component = this;
     return(
       <div className="claw-editor-canvas">
         <svg id="shapeDraw">
           {this.props.shapes.map(function(shape){
-            return this.state.shapeFactory.build(shape.type, shape.height, shape.width, shape.color);
+            return component.state.shapeFactory.build(shape.type, shape.height, shape.width, shape.color);
           })}
         </svg>
       </div>

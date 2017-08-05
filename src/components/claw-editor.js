@@ -14,8 +14,8 @@ export default class ClawEditor extends React.Component{
   /**
    * Default constructor.
    */
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
 
     this.state = {
       shapes : []
