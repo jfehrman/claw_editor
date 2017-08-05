@@ -14,7 +14,7 @@ const expect = Chai.expect;
 /**
  * Test the ShapeFactory class.
  * 
- * @author 1r0nm@n
+ * @author Joseph Fehrman
  * @since 04 August, 2017
  */
 describe('ShapeFactory', () => {
@@ -56,7 +56,19 @@ describe('ShapeFactory', () => {
     it('ShapeFactory shall be able to build a triangle when the build function is passed triangle description.', () => {
       var shapeFactory = new ShapeFactory();
       var results = shapeFactory.build('triangle', 10, 10, 'red');
-      //TODO Complete test.  Not enough time to finish the test today.
+      var expectedResults = {
+        'points' : "0,0 10,0 0,10",
+        'type' : 'polygon',
+        'fill' : 'red',
+      }
+      assert.equal(expectedResults.type, results.type);
+      assert.equal(expectedResults.fill, results.props.fill);
+      assert.equal(expectedResults.points, results.props.points);
+    });
+
+    it('ShapeFacory shall fail and throw an error when passed an invalid shape.', () => {
+      var shapeFactory = new ShapeFactory();
+      expect(shapeFactory.build.bind(shapeFactory, 'Not a shape', 10, 10, 'red')).to.throw(Error, 'Unable to create shape because it is unknown.');
     });
   });
 });

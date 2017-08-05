@@ -4,7 +4,9 @@
   "description": "Video game emblem editor.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*-test.js --compilers js:babel-core/register --recursive"
+    "test" : "mocha test/**/*-test.js --compilers js:babel-core/register --recursive",
+    "dev" : "webpack -d --watch",
+    "build" : "webpack -p"
   },
   "repository": {
     "type": "git",

@@ -29,10 +29,11 @@ export default class ShapeFactory{
         return <rect width={width} height={height} fill={color} />
         break;
       case 'triangle':
-        return <rect width={width} height={height} fill={color} />
+        var points = "0,0 " + width + ",0 0," + height;
+        return <polygon points={points} fill={color} />
         break;
       default:
-        throw new Error("Unable to create shpae because it is unknown.");
+        throw new Error("Unable to create shape because it is unknown.");
     }
   }
 }
