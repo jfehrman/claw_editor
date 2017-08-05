@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * Creates SVG shapes.
  * 
- * @author 1r0nm@n
+ * @author Joseph Fehrman
  * @since 04 August, 2017
  */
 export default class ShapeFactory{
